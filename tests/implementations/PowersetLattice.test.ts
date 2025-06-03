@@ -1,4 +1,4 @@
-import { PowersetLattice } from '../src';
+import { PowersetLattice } from '../../src';
 
 /**
  * Test suite for verifying the mathematical properties of PowersetLattice

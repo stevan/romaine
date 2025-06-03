@@ -1,4 +1,4 @@
-import { ScalarLattice, Known, Unknown, Conflict } from '../src';
+import { ScalarLattice, Known, Unknown, Conflict } from '../../src';
 
 /**
  * Test suite for verifying the mathematical properties of ScalarLattice

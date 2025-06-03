@@ -1,6 +1,6 @@
-import { ProductLattice, PowersetLattice, IntervalLattice } from '../src';
-import { ProductValue, createProduct } from '../src/types/product';
-import { Interval, createInterval } from '../src/types/interval';
+import { ProductLattice, PowersetLattice, IntervalLattice } from '../../src';
+import { ProductValue, createProduct } from '../../src/types/product';
+import { Interval, createInterval } from '../../src/types/interval';
 
 /**
  * Test suite for verifying the mathematical properties of ProductLattice

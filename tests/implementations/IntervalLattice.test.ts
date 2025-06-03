@@ -1,5 +1,5 @@
-import { IntervalLattice } from '../src';
-import { Interval, createInterval } from '../src/types/interval';
+import { IntervalLattice } from '../../src';
+import { Interval, createInterval } from '../../src/types/interval';
 
 /**
  * Test suite for verifying the mathematical properties of IntervalLattice

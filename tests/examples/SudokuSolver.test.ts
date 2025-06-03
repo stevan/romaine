@@ -1,4 +1,4 @@
-import { SudokuSolver } from '../src/examples/SudokuSolver';
+import { SudokuSolver } from '../../src/examples/SudokuSolver';
 
 describe('SudokuSolver', () => {
     test('solves a simple Sudoku puzzle', () => {
