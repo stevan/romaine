@@ -5,6 +5,8 @@
 // Core types and implementations
 export * from './types/scalar';
 export * from './types/lattice';
+export * from './types/interval';
+export * from './types/product';
 export * from './implementations/ScalarLattice';
 export * from './implementations/PowersetLattice';
 export * from './implementations/IntervalLattice';

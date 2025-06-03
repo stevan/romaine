@@ -1,12 +1,5 @@
 import { MutableLattice, LatticeProperties, JoinSemiLattice } from '../types/lattice';
-
-/**
- * Represents a pair of values from two different lattices
- */
-export interface ProductValue<A, B> {
-    first: A;
-    second: B;
-}
+import { ProductValue, createProduct } from '../types/product';
 
 /**
  * Implements a product lattice which combines two lattices into a new lattice.
@@ -33,27 +26,24 @@ export class ProductLattice<A, B> implements MutableLattice<ProductValue<A, B>>,
     get version(): number { return this._version; }
 
     get bottom(): ProductValue<A, B> {
-        return {
-            first: this._firstLattice.bottom,
-            second: this._secondLattice.bottom
-        };
+        return createProduct(
+            this._firstLattice.bottom,
+            this._secondLattice.bottom
+        );
     }
 
     get top(): ProductValue<A, B> | undefined {
         const top1 = this._firstLattice.top;
         const top2 = this._secondLattice.top;
         if (top1 === undefined || top2 === undefined) return undefined;
-        return {
-            first: top1,
-            second: top2
-        };
+        return createProduct(top1, top2);
     }
 
     join(a: ProductValue<A, B>, b: ProductValue<A, B>): ProductValue<A, B> {
-        return {
-            first: this._firstLattice.join(a.first, b.first),
-            second: this._secondLattice.join(a.second, b.second)
-        };
+        return createProduct(
+            this._firstLattice.join(a.first, b.first),
+            this._secondLattice.join(a.second, b.second)
+        );
     }
 
     mutatingJoin(other: ProductValue<A, B>): void {

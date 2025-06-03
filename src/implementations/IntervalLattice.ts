@@ -1,9 +1,5 @@
 import { MutableLattice, LatticeProperties } from '../types/lattice';
-
-interface Interval {
-    min: number;
-    max: number;
-}
+import { Interval, isValidInterval, createInterval } from '../types/interval';
 
 /**
  * Implements a lattice of intervals ordered by inclusion.
@@ -20,7 +16,7 @@ export class IntervalLattice implements MutableLattice<Interval | null>, Lattice
     constructor(
         private _contents: Interval | null
     ) {
-        if (_contents && _contents.min > _contents.max) {
+        if (_contents && !isValidInterval(_contents)) {
             throw new Error('Invalid interval: min must be less than or equal to max');
         }
     }
@@ -34,10 +30,10 @@ export class IntervalLattice implements MutableLattice<Interval | null>, Lattice
     join(a: Interval | null, b: Interval | null): Interval | null {
         if (!a) return b;
         if (!b) return a;
-        return {
-            min: Math.min(a.min, b.min),
-            max: Math.max(a.max, b.max)
-        };
+        return createInterval(
+            Math.min(a.min, b.min),
+            Math.max(a.max, b.max)
+        );
     }
 
     mutatingJoin(other: Interval | null): void {
