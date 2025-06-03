@@ -153,4 +153,120 @@ describe('IntervalLattice', () => {
             expect(() => createInterval(2, 1)).toThrow();
         });
     });
+
+    describe('Defensive Copying', () => {
+        test('contents getter returns defensive copy', () => {
+            const interval = createInterval(0, 1);
+            const lattice = new IntervalLattice(interval);
+
+            // Get contents and modify it
+            const contents = lattice.contents;
+            if (contents) {
+                contents.min = -1;
+                contents.max = 2;
+            }
+
+            // Original should be unchanged
+            expect(lattice.contents).toEqual(createInterval(0, 1));
+        });
+    });
+
+    describe('Ordering Edge Cases', () => {
+        test('lessThanOrEqual handles edge cases', () => {
+            const lattice = new IntervalLattice(createInterval(0, 1));
+
+            // Empty interval (null) is less than everything
+            expect(lattice.lessThanOrEqual(null, createInterval(0, 1))).toBe(true);
+            expect(lattice.lessThanOrEqual(null, null)).toBe(true);
+
+            // Non-empty interval is not less than empty interval
+            expect(lattice.lessThanOrEqual(createInterval(0, 1), null)).toBe(false);
+
+            // Point intervals
+            expect(lattice.lessThanOrEqual(
+                createInterval(1, 1),
+                createInterval(0, 2)
+            )).toBe(true);
+
+            // Equal bounds
+            expect(lattice.lessThanOrEqual(
+                createInterval(0, 1),
+                createInterval(0, 1)
+            )).toBe(true);
+
+            // Touching intervals
+            expect(lattice.lessThanOrEqual(
+                createInterval(1, 2),
+                createInterval(0, 2)
+            )).toBe(true);
+        });
+
+        test('equals handles edge cases', () => {
+            const lattice = new IntervalLattice(createInterval(0, 1));
+
+            // Empty intervals
+            expect(lattice.equals(null, null)).toBe(true);
+            expect(lattice.equals(null, createInterval(0, 1))).toBe(false);
+            expect(lattice.equals(createInterval(0, 1), null)).toBe(false);
+
+            // Point intervals
+            expect(lattice.equals(
+                createInterval(1, 1),
+                createInterval(1, 1)
+            )).toBe(true);
+
+            // Different intervals with same bounds
+            expect(lattice.equals(
+                createInterval(0, 1),
+                createInterval(0, 1)
+            )).toBe(true);
+        });
+    });
+
+    describe('Additional Operations Edge Cases', () => {
+        test('intersects handles edge cases', () => {
+            const lattice = new IntervalLattice(createInterval(0, 1));
+
+            // Empty intervals never intersect
+            expect(lattice.intersects(null, createInterval(0, 1))).toBe(false);
+            expect(lattice.intersects(createInterval(0, 1), null)).toBe(false);
+            expect(lattice.intersects(null, null)).toBe(false);
+
+            // Point intervals
+            expect(lattice.intersects(
+                createInterval(1, 1),
+                createInterval(1, 2)
+            )).toBe(true);
+
+            // Touching intervals
+            expect(lattice.intersects(
+                createInterval(0, 1),
+                createInterval(1, 2)
+            )).toBe(true);
+
+            // Non-intersecting intervals
+            expect(lattice.intersects(
+                createInterval(0, 1),
+                createInterval(2, 3)
+            )).toBe(false);
+        });
+
+        test('contains handles edge cases', () => {
+            const lattice = new IntervalLattice(createInterval(0, 1));
+
+            // Empty interval contains nothing
+            expect(lattice.contains(null, 0)).toBe(false);
+
+            // Point interval contains its point
+            expect(lattice.contains(createInterval(1, 1), 1)).toBe(true);
+
+            // Interval bounds
+            const interval = createInterval(0, 1);
+            expect(lattice.contains(interval, 0)).toBe(true);  // Lower bound
+            expect(lattice.contains(interval, 1)).toBe(true);  // Upper bound
+            expect(lattice.contains(interval, 0.5)).toBe(true);  // Middle
+            expect(lattice.contains(interval, -0.1)).toBe(false);  // Below
+            expect(lattice.contains(interval, 1.1)).toBe(false);  // Above
+        });
+    });
 });

@@ -146,4 +146,33 @@ describe('ProductLattice', () => {
             expect(productLattice.equals(a, c)).toBe(false);
         });
     });
+
+    describe('Top Element Cases', () => {
+        test('top is undefined when any component has no top', () => {
+            // IntervalLattice has no top element
+            const intervalLattice = new IntervalLattice(createInterval(0, 1));
+
+            // PowersetLattice has a top element (universe)
+            const setLattice = new PowersetLattice(new Set([1]), universe);
+
+            // Product with one topless lattice
+            const productLattice1 = new ProductLattice(
+                createProduct(new Set([1]), createInterval(0, 1)),
+                setLattice,
+                intervalLattice
+            );
+            expect(productLattice1.top).toBeUndefined();
+
+            // Product with both lattices having tops
+            const setLattice2 = new PowersetLattice(new Set([1]), new Set([1, 2]));
+            const productLattice2 = new ProductLattice(
+                createProduct(new Set([1]), new Set([1])),
+                setLattice,
+                setLattice2
+            );
+            expect(productLattice2.top).toEqual(
+                createProduct(universe, new Set([1, 2]))
+            );
+        });
+    });
 });
