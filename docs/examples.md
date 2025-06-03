@@ -11,10 +11,11 @@ A constraint satisfaction puzzle solver that uses PowersetLattice to track possi
 
 ## Theoretical Examples
 
-These examples demonstrate potential applications of lattice theory but are not yet implemented.
+These examples demonstrate potential applications of lattice theory across different domains.
 
-### Chess Engine
+### Gaming and Interactive Entertainment
 
+#### Chess Engine
 A chess implementation could leverage multiple lattices for different aspects of the game:
 
 - **ScalarLattice**:
@@ -39,8 +40,7 @@ A chess implementation could leverage multiple lattices for different aspects of
   - Threatened squares
   - Control of the center
 
-### Roguelike Game
-
+#### Roguelike Game
 A roguelike game could use lattices to manage various game systems:
 
 - **ScalarLattice**:
@@ -69,3 +69,116 @@ A roguelike game could use lattices to manage various game systems:
   - Available abilities
   - Inventory management
   - Quest objectives
+
+### Static Analysis and Type Systems
+
+#### Type Inference Engine
+A type inference system could use lattices to model type relationships:
+
+- **PowersetLattice**:
+  - Type constraints and possibilities
+  - Method overload resolution
+  - Type intersection and union operations
+
+- **ProductLattice**:
+  - Generic type parameters
+  - Function type signatures (parameter-types × return-type)
+
+- **ScalarLattice**:
+  - Type specificity hierarchy
+  - Subtyping relationships
+  - Type compatibility levels
+
+#### Data Flow Analysis
+Static analysis for code optimization and bug detection:
+
+- **PowersetLattice**:
+  - Reaching definitions
+  - Live variable analysis
+  - Available expressions
+
+- **ScalarLattice**:
+  - Variable state (uninitialized → initialized → used)
+  - Null safety levels
+  - Resource lifecycle states
+
+### Distributed Systems
+
+#### Conflict-Free Replicated Data Types (CRDTs)
+Implementation of various CRDTs using lattice properties:
+
+- **PowersetLattice**:
+  - Observed-Remove Set
+  - Two-Phase Set
+  - Unique Set
+
+- **ScalarLattice**:
+  - Version vectors
+  - Lamport timestamps
+  - State merging
+
+#### Distributed Cache Coherency
+Cache consistency protocol implementation:
+
+- **ScalarLattice**:
+  - Cache line states (invalid → shared → exclusive → modified)
+  - Version ordering
+  - Consistency levels
+
+- **ProductLattice**:
+  - Cache entry (value × timestamp)
+  - Node state (data × metadata)
+
+### Machine Learning
+
+#### Feature Space Analysis
+Feature selection and transformation:
+
+- **PowersetLattice**:
+  - Feature subset selection
+  - Attribute dependencies
+  - Feature interaction groups
+
+- **IntervalLattice**:
+  - Numerical feature ranges
+  - Confidence intervals
+  - Prediction bounds
+
+#### Model Interpretability
+Understanding and explaining model decisions:
+
+- **ScalarLattice**:
+  - Decision tree paths
+  - Rule confidence levels
+  - Feature importance hierarchies
+
+- **ProductLattice**:
+  - Feature contribution scores (feature × importance)
+  - Decision boundaries (feature-space × classification)
+
+### Security and Access Control
+
+#### Permission System
+Role-based access control implementation:
+
+- **PowersetLattice**:
+  - Permission sets
+  - Role capabilities
+  - Resource access rights
+
+- **ProductLattice**:
+  - User-role assignments
+  - Resource-permission mappings
+
+#### Information Flow Control
+Security level tracking:
+
+- **ScalarLattice**:
+  - Security clearance levels
+  - Data sensitivity classifications
+  - Trust boundaries
+
+- **PowersetLattice**:
+  - Taint tracking
+  - Data flow paths
+  - Security compartments
