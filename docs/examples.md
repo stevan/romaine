@@ -9,6 +9,12 @@ These examples have working implementations in the codebase:
 ### [Sudoku Solver](examples/sudoku-solver.md)
 A constraint satisfaction puzzle solver that uses PowersetLattice to track possible values and solve Sudoku puzzles. Implementation available in `src/examples/SudokuSolver.ts`.
 
+### [Permission System](examples/permission-system.md)
+A Role-Based Access Control (RBAC) system that uses PowersetLattice to manage roles, permissions, and access control. Implementation available in `src/examples/PermissionSystem.ts`.
+
+### [Type Inference](examples/type-inference.md)
+A basic type inference system that uses PowersetLattice and ScalarLattice to model type relationships and inference rules. Implementation available in `src/examples/TypeInference.ts`.
+
 ## Theoretical Examples
 
 These examples demonstrate potential applications of lattice theory across different domains.
